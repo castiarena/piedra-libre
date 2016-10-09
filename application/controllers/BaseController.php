@@ -16,12 +16,17 @@ abstract class BaseController extends CI_Controller{
     }
 
     public function _render($content, $title){
-        $data = [
-            'title' => 'Piedra libre - '. $title ,
-            'content' => $content,
-            'navigation' => $this->getNavigation()
-        ];
-        $this->load->view('layout' ,$data);
+        if(WIP){
+
+        }else{
+            $data = [
+                'title' => 'Piedra libre - '. $title ,
+                'content' => $content,
+                'navigation' => $this->getNavigation()
+            ];
+            $this->load->view('layout' ,$data);
+        }
+
     }
 
     public function getNavigation(){
