@@ -25,13 +25,18 @@ class Admin extends CI_Controller{
             $user = null;
         }
 
-        $data = [
-            'title' => 'Piedra libre - '. $title ,
-            'content' => $content,
-            'user' => $user,
-            'navigation' => $this->getNavigation()
-        ];
-        $this->parser->parse('admin/layout' , $data);
+        if(WIP){
+            redirect('');
+        }else{
+            $data = [
+                'title' => 'Piedra libre - '. $title ,
+                'content' => $content,
+                'user' => $user,
+                'navigation' => $this->getNavigation()
+            ];
+            $this->parser->parse('admin/layout' , $data);
+        }
+
     }
 
     private function getNavigation(){

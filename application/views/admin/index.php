@@ -40,10 +40,6 @@
                     <div class="btn-group">
                         <?= form_reset('Submit','Borrar',['class' => 'btn btn-danger'])?>
                     </div>
-                    <div class="btn-group">
-                        <a href="<?= site_url('admin/create') ?>" class="btn btn-default">Soy nuevo</a>
-
-                    </div>
                 </div>
             </div>
             <div class="form-group">
