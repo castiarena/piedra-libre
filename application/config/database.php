@@ -74,11 +74,11 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> '',
+	'dsn'	=> (ENVIRONMENT === 'production') ? 'mysql:host=localhost; dbname=fundpiedralibre_db; charset=utf8;' : 'mysql:host=localhost; dbname=piedralibre; charset=utf8;',
 	'hostname' => 'mysql:host=localhost',
 	'username' => (ENVIRONMENT === 'production') ? 'fundpiedralibre_webmaster' : 'root',
 	'password' => (ENVIRONMENT === 'production') ? 'qBqHR8u27X82' : 'root',
-	'database' => (ENVIRONMENT === 'production') ? 'fundpiedralibre_db' : 'piedralibre',
+	'database' => (ENVIRONMENT === 'production') ? 'dbname=fundpiedralibre_db' : 'dbname=piedralibre',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

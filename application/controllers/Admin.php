@@ -109,7 +109,7 @@ class Admin extends CI_Controller{
             $email          = $this->input->post('email');
 
 
-            $this->users_model->create([
+            $this->Users_model->create([
                 'name' => $name,
                 'password' => $pass,
                 'nickname' => $nickName,
@@ -128,7 +128,7 @@ class Admin extends CI_Controller{
 
     private function access( $email, $pass){
 
-        $user = $this->users_model->getUser($email, $pass);
+        $user = $this->Users_model->getUser($email, $pass);
         if(count($user) === 0){
             $userData = array(
                 'username'  => null,
@@ -196,7 +196,7 @@ class Admin extends CI_Controller{
                 $errors['image'] = $imageLoader['error'];
             }else{
                 $urlImage = $imageLoader['status']['full_path'];
-                $this->news_model->insert([
+                $this->News_model->insert([
                     'title' => $this->input->post('title'),
                     'date' => $this->input->post('date'),
                     'description' => $this->input->post('description'),
@@ -214,7 +214,7 @@ class Admin extends CI_Controller{
             case 'edit':
                 $this->session->set_userdata([ 'section' => 'admin/news']);
                 $content = $this->parser->parse('admin/news_create',[
-                    'new_edit' => $this->news_model->getById($id),
+                    'new_edit' => $this->News_model->getById($id),
                     'errors' => $errors
                 ],true);
                 $this->_render($content,'Cargar Noticia');
@@ -223,7 +223,7 @@ class Admin extends CI_Controller{
 
                 $this->session->set_userdata([ 'section' => 'admin/news']);
                 $content = $this->parser->parse('admin/news_create',[
-                    'tags' => $this->tags_model->getAll(),
+                    'tags' => $this->Tags_model->getAll(),
                     'errors' => $errors
                 ],true);
                 $this->_render($content,'Cargar Noticia');
@@ -231,7 +231,7 @@ class Admin extends CI_Controller{
             default:
                 $this->session->set_userdata([ 'section' => 'admin/news']);
                 $content = $this->parser->parse('admin/news',[
-                    'news' => $this->news_model->latest()
+                    'news' => $this->News_model->latest()
                 ],true);
                 $this->_render($content,'Noticias');
                 break;
@@ -262,7 +262,7 @@ class Admin extends CI_Controller{
         $this->form_validate->set_rules('name', 'Nombre', 'required|min_length[3]|is_unique[tag.name]');
 
         if($stat == 'remove'){
-            $this->tags_model->remove($id);
+            $this->Tags_model->remove($id);
             redirect('admin/tags');
         }
 
@@ -272,21 +272,21 @@ class Admin extends CI_Controller{
             ];
             if($stat == 'edit' && $id != null){
                 $tag['id'] = $id;
-                $this->tags_model->update($tag);
+                $this->Tags_model->update($tag);
                 redirect('admin/tags');
             }else{
-                $this->tags_model->insert( $tag );
+                $this->Tags_model->insert( $tag );
                 redirect('admin/tags');
             }
         }else{
             if($stat == 'edit' && $id != null){
                 $action_url = site_url('admin/tags/edit/').$id;
                 $editing = true;
-                $tag = $this->tags_model->getOne($id);
+                $tag = $this->Tags_model->getOne($id);
             }
         }
 
-        $tags = $this->tags_model->getAllWithUsage();
+        $tags = $this->Tags_model->getAllWithUsage();
 
         $content =  $this->parser->parse('admin/tags',[
             'tags' => $tags,
