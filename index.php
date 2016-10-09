@@ -53,7 +53,7 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-if($_SERVER['SERVER_NAME']=='fundacionpiedralibre.org'){
+if( $_SERVER['SERVER_NAME'] == 'fundacionpiedralibre.org'  || $_SERVER['SERVER_NAME'] == 'www.fundacionpiedralibre.org' ){
 	define('ENVIRONMENT', 'production');
 }else if ($_SERVER['SERVER_NAME']=='test.siteurl.com'){
 	define('ENVIRONMENT', 'testing');
