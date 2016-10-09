@@ -1,0 +1,69 @@
+.bg{
+  &-img{
+    &-full{
+      height: 480px;
+      background-size: auto 100%;
+      background-position: center;
+      width: 100%;
+    }
+  }
+  &-one{
+    background-color: $brand-base-1;
+  }
+
+  &-two{
+    background-color: $brand-base-2;
+  }
+
+  &-three{
+    background-color: $brand-base-3;
+  }
+  &-four{
+    background-color: $brand-base-4;
+  }
+  &-five{
+    background-color: $brand-base-5;
+  }
+
+  &-crema{
+    background-color: $color-crema;
+  }
+  &-gris-light{
+    background-color: $gray-light;
+  }
+  &-gris-lightest{
+    background-color: $gray-lightest;
+    &-cropped{
+      position: relative;
+      &:before{
+        content: ' ';
+        height: 14px;
+        position: absolute;
+        width: 100%;
+        bottom: 100%;
+
+        left: 0;
+        background-image: url('../img/border-crop.png');
+        background-repeat: repeat-x;
+      }
+      &-bottom{
+        &:before{
+          background-image: url('../img/border-crop-bottom.png');
+          top:auto;
+          top: 100%;
+        }
+      }
+    }
+  }
+  &-gris-lighter{
+    background-color: $gray-lighter;
+  }
+  &-gris{
+    background-color: $gray;
+  }
+
+  &-negro{
+    background-color: #000;
+  }
+}
+

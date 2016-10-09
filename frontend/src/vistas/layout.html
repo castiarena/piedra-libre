@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link href='https://fonts.googleapis.com/css?family=Rubik|Lato:400,300,100,700,900' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <a class="header-logo" href="index.html"><img src="img/logo.svg" alt="{{ title }}"></a>
+                <nav class="header-menu hidden-xs">
+                    {{#each nav}}
+                    <div class="header-menu__item">
+                        <a href="{{this.url}}" class="header-menu__link">
+                            {{#if this.icon}}
+                            <i class="icon icon-{{this.icon}}"></i>
+                            {{/if}}
+                            {{this.name}}
+                            {{#if this.subnav}}
+                            >
+                            {{/if}}
+                        </a>
+
+                        {{#if this.subnav}}
+                        <div class="header-menu__sub-items">
+                            {{#each this.subnav}}
+                            <a href="{{this.url}}" class="header-menu__sub-link">{{this.name}}</a><br>
+                            {{/each}}
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    {{{content}}}
+</main>
+
+<footer class="bg-negro footer">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="col-lg-6">
+                    <nav class="footer-nav">
+                        {{#each nav}}
+                        <div class="footer-nav__item">
+                            <a href="{{this.url}}" class="footer-nav__link">
+                                {{this.name}}
+                            </a>
+                        </div>
+                        {{/each}}
+                    </nav>
+                </div>
+                <div class="col-lg-6">
+                    <nav class="footer-nav">
+                        <div class="footer-nav__item">
+                            <a href="facebook.com" class="footer-nav__link">
+                                Facebook <i class="fa fa-facebook-square"></i>
+                            </a>
+                        </div>
+                    </nav>
+                </div>
+
+            </div>
+            <div class="col-lg-4">
+                <img src="img/iso.svg" alt="" width="300" class="center-block">
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                    <button class="btn " type="button">Newsletter</button>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Tu email...">
+                </div><!-- /input-group -->
+                <br>
+                <p><a href="mailto:fundacionarenales@gmail.com"> <i class="fa fa-envelope"></i>  fundacionarenales@gmail.com</a></p>
+                <p> - Ruben Armando “Yagua” Rodríguez ( presidente ) - +54 011 67275997 o +54 2622 524895</p>
+                <p> - Gerardo Castillo ( Tesorero ) - +54 261 5751781</p>
+                <p> - Mora Rodriguez  - +54 011 49 403220</p>
+
+            </div>
+
+
+        </div>
+        <div class="row footer-register">
+            <div class="col-md-12">
+                <h6 class="text-center">Piedra Libre - Fundación - Mendonza Arenales <i class="fa fa-copyright"></i> 2016</h6>
+            </div>
+
+        </div>
+    </div>
+</footer>
+<script src="js/site.js"></script>
+</body>
+</html>

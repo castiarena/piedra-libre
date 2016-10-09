@@ -1,0 +1,13 @@
+@import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+a,button,input[type="button"]{
+  transition: all .2s linear;
+  &:hover,&:visited,&:focus{
+    text-decoration: none;
+  }
+}
+
+body{
+  background-color: $brand-base-5;
+}

@@ -1,0 +1,30 @@
+.btn-ghost{
+  background-color: $brand-base-2;
+  border-radius: 3px;
+  padding: 10px 35px;
+  font-weight: 900;
+  font-family: $ff-titles;
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  letter-spacing: 1px;
+  margin: 5px 10px 5px 0;
+  &:hover{
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  &-one{
+    background-color: $brand-base-2;
+    color: $brand-base-3;
+    &:hover{
+      background-color: rgba($brand-base-2 , 0.7);
+      color: $brand-base-3;
+    }
+  }
+
+  &-two{
+    background-color: $brand-base-1;
+    color: $brand-base-4;
+    &:hover{
+      background-color: rgba($brand-base-1 , 0.7);
+      color: $brand-base-4;
+    }
+  }
+}

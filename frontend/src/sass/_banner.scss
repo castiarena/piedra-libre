@@ -1,0 +1,49 @@
+.banner{
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  overflow: hidden;
+  width: 100%;
+  &-visible{
+    display: block;
+  }
+  &-seccion{
+    height: auto;
+    padding: 170px 0;
+  }
+
+  &-text{
+    padding: 180px 0 0 0;
+  }
+}
+
+.banner-static{
+  background-attachment: fixed;
+  background-image: linear-gradient( rgba(0,0,0,0.1), rgba(0,0,0,0.3)) , url("../img/banner-home.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+.banner-scroll{
+  position: absolute;
+  margin-left: -15px;
+  left: 50%;
+  bottom: 30px;
+  display: inline-block;
+  border-radius: 5px;
+  border: 3px solid #fff;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  transform: rotate(45deg) scale(1);
+  width: 30px;
+  height: 30px;
+  transition: all .2s linear;
+  &:hover{
+    transform: rotate(45deg) scale(1.1);
+  }
+}

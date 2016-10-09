@@ -1,0 +1,101 @@
+body{
+  background-color: #fafafa;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+.clear-cols_left{
+  padding-left:0;
+}
+
+.clear-cols_right{
+  padding-right: 0;
+}
+
+$width : 230px;
+$padding: 20px;
+$color-base: rgba(120, 190, 160, 1);
+
+/* The animation code */
+@keyframes left {
+  from {
+    left:-100%;
+  }
+  to {
+    left: 0;
+  }
+}
+/* The animation code */
+@keyframes left_padding {
+  from {
+    padding-left: 0;
+  }
+  to {
+    padding-left: $width + $padding;
+  }
+}
+
+.lateral-bar{
+  animation-name: left;
+  animation-duration: .8s;
+  z-index: 1031;
+  position: fixed;
+  width: $width;
+  padding: $padding;
+  height: 100%;
+  background-color:  $color-base;
+  box-shadow: 0 0 40px -4px  rgba(10, 10, 10, .5);
+  .list-group{
+    border-radius: 50px ;
+    box-shadow: 0 0 40px -4px  rgba(10, 10, 10, .5);
+  }
+
+  .active{
+    background-color: $color-base;
+    border-color: darken($color-base,4%);
+    &:hover{
+      background-color: lighten($color-base,4%);
+      border-color: darken($color-base,4%);
+    }
+  }
+}
+
+.content-logged{
+  padding: 50px 20px 20px $width + $padding;
+  animation-name: left_padding;
+  animation-timing-function: ease-out;
+  animation-duration: .8s;
+}
+
+.logo-admin{
+  display: inline-block;
+  padding:20px;
+  width: 100%;
+  text-align: center;
+  img{
+    max-width:200px;
+    display: inline-block;
+  }
+}
+
+.admin-status-top{
+  z-index:10;
+  position: fixed;
+  width: 100%;
+  display: inline-block;
+  padding: 10px;
+  border-bottom: 1px solid #8a8a8a;
+  background-color:$color-base;
+  color: #fff;
+  &__item{
+    border-right: 1px solid #fff;
+    padding: 0 10px;
+    display: inline-block;
+    &:last-child{
+      border:none;
+    }
+    a{
+      color: #f4f4f4;
+    }
+  }
+}
