@@ -79,7 +79,7 @@ $db['default'] = array(
 	'username' => (ENVIRONMENT !== 'production') ? 'root' : 'fundpiedralibre_webmaster',
 	'password' => (ENVIRONMENT !== 'production') ? 'root' : 'qBqHR8u27X82',
 	'database' => (ENVIRONMENT !== 'production') ? 'piedralibre' : 'fundpiedralibre_db',
-	'dbdriver' => 'mysqli',
+	'dbdriver' => 'mysql',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
