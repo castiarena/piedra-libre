@@ -12,7 +12,7 @@ abstract class BaseController extends CI_Controller{
         parent::__construct();
         $this->load->library('session');
         $this->load->helper('url');
-        $this->load->model('users_model');
+        $this->load->model('Users_model');
     }
 
     public function _render($content, $title){

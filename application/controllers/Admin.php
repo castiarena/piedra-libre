@@ -7,9 +7,9 @@ class Admin extends CI_Controller{
         $this->load->helper('form');
         $this->load->helper('url');
         $this->load->library('session');
-        $this->load->model('users_model');
-        $this->load->model('news_model');
-        $this->load->model('tags_model');
+        $this->load->model('Users_model');
+        $this->load->model('News_model');
+        $this->load->model('Tags_model');
         $this->load->library('form_validate');
         $this->load->library('parser');
     }
