@@ -76,9 +76,9 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => 'root',
-	'database' => 'piedralibre',
+	'username' => (ENVIRONMENT !== 'production') ? 'root' : 'fundpiedralibre_webmaster',
+	'password' => (ENVIRONMENT !== 'production') ? 'root' : 'qBqHR8u27X82',
+	'database' => (ENVIRONMENT !== 'production') ? 'piedralibre' : 'fundpiedralibre_db',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
