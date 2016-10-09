@@ -12,7 +12,6 @@ class Admin extends CI_Controller{
         $this->load->model('tags_model');
         $this->load->library('form_validate');
         $this->load->library('parser');
-
     }
 
     private function _render($content, $title = 'Admin'){
