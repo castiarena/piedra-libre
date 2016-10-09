@@ -16,7 +16,7 @@ abstract class BaseController extends CI_Controller{
     }
 
     public function _render($content, $title){
-        if(WIP){
+        if(WIP || !$this->session->userdata('development')){
             $data = [
                 'title' => 'Piedra libre - En construccion' ,
                 'navigation' =>[

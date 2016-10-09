@@ -6,8 +6,7 @@
             </div>
             <h1 class="text-center">Acceder</h1>
         </div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
+        <div class="col-md-4 col-md-offset-4">
             <? if(isset($errors['user'])){?>
                 <div class=" text-danger"> <small><?=$errors['user']?></small></div>
             <? } ?>
@@ -46,7 +45,6 @@
             </div>
             <?= form_close()?>
         </div>
-        <div class="col-md-4"></div>
 
     </div>
 </div>

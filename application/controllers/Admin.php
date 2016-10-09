@@ -25,7 +25,7 @@ class Admin extends CI_Controller{
             $user = null;
         }
 
-        if(WIP){
+        if(WIP || !$this->session->userdata('development')){
             redirect('');
         }else{
             $data = [
