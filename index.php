@@ -53,8 +53,13 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
-
+if($_SERVER['SERVER_NAME']=='fundacionpiedralibre.org'){
+	define('ENVIRONMENT', 'production');
+}else if ($_SERVER['SERVER_NAME']=='test.siteurl.com'){
+	define('ENVIRONMENT', 'testing');
+}else {
+	define('ENVIRONMENT', 'development');
+}
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
