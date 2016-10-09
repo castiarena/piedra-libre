@@ -57,9 +57,6 @@
 if( $_SERVER['SERVER_NAME'] == 'fundacionpiedralibre.org'  || $_SERVER['SERVER_NAME'] == 'www.fundacionpiedralibre.org' ){
 	define('ENVIRONMENT', 'production');
 	define('WIP',true);
-
-}else if ($_SERVER['SERVER_NAME']=='test.siteurl.com'){
-	define('ENVIRONMENT', 'testing');
 }else {
 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 	define('WIP',false);

@@ -16,15 +16,18 @@ abstract class BaseController extends CI_Controller{
     }
 
     public function _render($content, $title){
-        if(WIP || !$this->session->userdata('development')){
-            $data = [
-                'title' => 'Piedra libre - En construccion' ,
-                'navigation' =>[
-                    ['name' => 'Facebook', 'url' =>  'https://www.facebook.com/fundacionpiedralibre/', 'active' => ''],
-                    ['name' => 'E-mail', 'url' =>  'mailto:fundacionarenales@gmail.com', 'active' => '']
-                ]
-            ];
-            $this->load->view('mantenimiento' ,$data);
+        if(!$this->session->userdata('development')){
+            if(WIP){
+                $data = [
+                    'title' => 'Piedra libre - En construccion' ,
+                    'navigation' =>[
+                        ['name' => 'Facebook', 'url' =>  'https://www.facebook.com/fundacionpiedralibre/', 'active' => ''],
+                        ['name' => 'E-mail', 'url' =>  'mailto:fundacionarenales@gmail.com', 'active' => '']
+                    ]
+                ];
+                $this->load->view('mantenimiento' ,$data);
+            }
+
         }else{
             $data = [
                 'title' => 'Piedra libre - '. $title ,

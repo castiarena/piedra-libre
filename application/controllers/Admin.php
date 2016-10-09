@@ -25,8 +25,10 @@ class Admin extends CI_Controller{
             $user = null;
         }
 
-        if(WIP || !$this->session->userdata('development')){
-            redirect('');
+        if(!$this->session->userdata('development')){
+            if(WIP){
+                redirect('');
+            }
         }else{
             $data = [
                 'title' => 'Piedra libre - '. $title ,
