@@ -5,11 +5,11 @@ class Home extends BaseController{
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('news_model');
+        $this->load->model('News_model');
     }
 
     public function index(){
-        $allNews = $this->news_model->latest();
+        $allNews = $this->News_model->latest();
         $news_list1 = [];
         $news_list2 = [];
         $news_list3 = [];
@@ -26,7 +26,7 @@ class Home extends BaseController{
                     $news_list3[] = $new;
                     break;
                 default:
-                    echo "caca";
+                    echo "FATAL ERROR";
                     die();
                     break;
             }
