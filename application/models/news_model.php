@@ -8,7 +8,8 @@ class News_model extends CI_Model{
 
     public function latest($cant = 10){
         $query = $this->db->get('news', $cant);
-        return json_decode(json_encode($query->result_array()), FALSE);
+        echo "<script>alert('". ($query ? 'hay' : 'no hay')."')</script>";
+        return $query ? $query->result() : [];
     }
 
     public function getById($id){
