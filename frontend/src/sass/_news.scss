@@ -3,7 +3,7 @@
   &-box{
     color: #fff;
     border-radius: 5px;
-    padding: 1.75em;
+    padding: 1em 1.75em 1.75em;
     display: inline-block;
     margin:1.75em;
     width: calc(100% - 3.60em);
@@ -14,11 +14,19 @@
     &-col{
       width: 33%;
       float: left;
+      @include mobile(){
+        width: 100%;
+      }
+      @include tablet(){
+        width: 50%;
+      }
     }
     // news-box-image__container
     &-img__container{
       margin: -1.75em -1.75em 0;
       width: calc(100% + 3.5em);
+      max-height: 180px;
+      overflow: hidden;
       img{
         border-radius: 5px;
         display: block;
@@ -36,6 +44,12 @@
       margin: 15px 0 15px;
       font-size: $fz-xl;
       color: #fff;
+    }
+
+    &-description{
+      max-height: 180px;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }

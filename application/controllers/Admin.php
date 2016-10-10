@@ -10,6 +10,7 @@ class Admin extends CI_Controller{
         $this->load->model('Users_model');
         $this->load->model('News_model');
         $this->load->model('Tags_model');
+        $this->load->model('Events_model');
         $this->load->library('form_validate');
         $this->load->library('parser');
     }
@@ -25,7 +26,7 @@ class Admin extends CI_Controller{
             $user = null;
         }
 
-        if(!$this->session->userdata('development')){
+        if(!$this->session->userdata('development')  && ENVIRONMENT === 'production'){
             if(WIP){
                 redirect('');
             }
@@ -95,7 +96,11 @@ class Admin extends CI_Controller{
         $this->session->userdata('logged');
 
 
-        $content = $this->load->view('admin/logged', [], true);
+        $content = $this->load->view('admin/logged', [
+            'tagsCount' => $this->Tags_model->countAll(),
+            'eventsCount' => $this->Events_model->countAll(),
+            'newsCount' => $this->News_model->countAll()
+        ], true);
         $this->_render($content, 'Bienvenido!');
 
     }
@@ -165,75 +170,101 @@ class Admin extends CI_Controller{
         redirect('admin');
     }
 
-    private function upLoadImage($image){
-        $errorImage = null;
-        $imageStatus = null;
-        $config['upload_path']          = './uploads/';
-        $config['allowed_types']        = 'gif|jpg|png';
-        $config['max_size']             = 100;
-        $config['max_width']            = 1024;
-        $config['max_height']           = 768;
-
-        $this->load->library('upload', $config);
-        if ( !$this->upload->do_upload($image)){
-            $errorImage  = array('error' => $this->upload->display_errors());
-        } else {
-            $imageStatus = array('upload_data' => $this->upload->data());
-        }
-        return [
-            'error' => $errorImage,
-            'status' => $imageStatus
-        ];
-    }
-
     public function news($stat = '' , $id = ''){
-        $errors =['image'=> null, 'form' => null];
+        $errors = null;
+        $new = null;
+
+        $config = [
+            'upload_path' => './uploads/',
+            'allowed_types' => 'gif|jpg|png',
+            'max_size' => 200,
+            'max_width' => 1920,
+            'max_height' => 1920
+        ];
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        $this->form_validate->set_rules('title', 'Title', 'required|is_unique[news.title]');
+        $this->form_validate->set_rules('description', 'Description', 'required|min_length[30]');
+        $this->form_validate->set_rules('date', 'Date', 'required');
+        $this->form_validate->set_rules('tag', 'Tag', 'required');
 
 
 
-        if($this->input->post('title') &&
-            $this->input->post('description') &&
-            $this->input->post('date') &&
-            $this->input->post('image') &&
-            $this->input->post('tag')
-        ){
-            $urlImage = '';
-            $imageLoader = $this->upLoadImage('image');
-            if($imageLoader['error'] != null){
-                $errors['image'] = $imageLoader['error'];
+        if($this->form_validate->run()){
+            $upImage = $this->uploadFile('image');
+
+            if(!$upImage['status']){
+                $errors['image'] = $upImage['errors'];
+                $new['image'] = '';
             }else{
-                $urlImage = $imageLoader['status']['full_path'];
-                $this->News_model->insert([
-                    'title' => $this->input->post('title'),
-                    'date' => $this->input->post('date'),
-                    'description' => $this->input->post('description'),
-                    'tag' => $this->input->post('tag'),
-                    'image' => $urlImage
-                ]);
+                $new['image'] = $upImage['status']['url'];
             }
-
-
-
+            $new['title'] = $this->input->post('title');
+            $new['date'] = $this->input->post('date');
+            $new['description'] = $this->input->post('description');
+            $new['tag'] = $this->input->post('tag');
         }else{
-            $errors['form'] = validation_errors();
+            if(validation_errors()){
+                $errors['form'] = validation_errors();
+            }
         }
+
+
+//        echo "<script>console.log('".json_encode( $new)."')</script>";
+
+
+
         switch($stat){
             case 'edit':
                 $this->session->set_userdata([ 'section' => 'admin/news']);
-                $content = $this->parser->parse('admin/news_create',[
-                    'new_edit' => $this->News_model->getById($id),
-                    'errors' => $errors
+                $selected = $this->News_model->getById($id);
+                $content = $this->parser->parse('admin/news_edit',[
+                    'new_edit' => [[
+                        'id' => $selected->id,
+                        'title' => $selected->title,
+                        'description' => $selected->description,
+                        'tags' => $this->Tags_model->getOne($selected->tags),
+                        'images' => site_url($selected->images),
+                        'date' => $selected->date,
+                    ]],
+                    'errors' => $errors,
+                    'tags' => $this->Tags_model->getAll(),
                 ],true);
                 $this->_render($content,'Cargar Noticia');
                 break;
             case 'create':
 
+                if(count($new) > 1){
+                    $this->News_model->insert($new);
+                    redirect('admin/news');
+                }
                 $this->session->set_userdata([ 'section' => 'admin/news']);
                 $content = $this->parser->parse('admin/news_create',[
                     'tags' => $this->Tags_model->getAll(),
                     'errors' => $errors
                 ],true);
                 $this->_render($content,'Cargar Noticia');
+                break;
+            case 'remove':
+                $this->News_model->delete($id);
+                redirect('admin/news');
+                break;
+            case 'view':
+                $this->session->set_userdata([ 'section' => 'admin/news']);
+                $selected = $this->News_model->getById($id);
+                $this->debug($this->Tags_model->getOne($selected->tags));
+                $content = $this->parser->parse('admin/news_view',[
+                    'new_view' => [[
+                        'id' => $selected->id,
+                        'title' => $selected->title,
+                        'description' => $selected->description,
+                        'tags' => $this->Tags_model->getOne($selected->tags)['name'],
+                        'images' => site_url($selected->images),
+                        'date' => $selected->date,
+                    ]]
+                ],true);
+                $this->_render($content,'Noticias');
                 break;
             default:
                 $this->session->set_userdata([ 'section' => 'admin/news']);
@@ -246,20 +277,111 @@ class Admin extends CI_Controller{
 
     }
 
-    public function events($stat = ''){
+    public function events($stat = '' , $id = ''){
+        $errors = null;
+        $event = null;
+
+        $config = [
+            'upload_path' => './uploads/',
+            'allowed_types' => 'gif|jpg|png',
+            'max_size' => 200,
+            'max_width' => 1920,
+            'max_height' => 1920
+        ];
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        $this->form_validate->set_rules('title', 'Title', 'required|is_unique[news.title]');
+        $this->form_validate->set_rules('description', 'Description', 'required|min_length[30]');
+        $this->form_validate->set_rules('date', 'Date', 'required');
+        $this->form_validate->set_rules('tag', 'Tag', 'required');
+
+
+
+        if($this->form_validate->run()){
+            $upImage = $this->uploadFile('image');
+
+            if(!$upImage['status']){
+                $errors['image'] = $upImage['errors'];
+                $event['image'] = '';
+            }else{
+                $event['image'] = $upImage['status']['url'];
+            }
+            $event['title'] = $this->input->post('title');
+            $event['date'] = $this->input->post('date');
+            $event['description'] = $this->input->post('description');
+            $event['tag'] = $this->input->post('tag');
+        }else{
+            if(validation_errors()){
+                $errors['form'] = validation_errors();
+            }
+        }
+
+
+//        echo "<script>console.log('".json_encode( $new)."')</script>";
+
+
 
         switch($stat){
-            case 'create':
+            case 'edit':
                 $this->session->set_userdata([ 'section' => 'admin/events']);
-                $content = $this->load->view('admin/events_create',[],true);
-                $this->_render($content,'Crear Evento');
+                $selected = $this->Events_model->getById($id);
+                $content = $this->parser->parse('admin/events_edit',[
+                    'event_edit' => [[
+                        'id' => $selected->id,
+                        'title' => $selected->title,
+                        'description' => $selected->description,
+                        'tags' => $this->Tags_model->getOne($selected->tags),
+                        'images' => site_url($selected->images),
+                        'date' => $selected->date,
+                    ]],
+                    'errors' => $errors,
+                    'tags' => $this->Tags_model->getAll(),
+                ],true);
+                $this->_render($content,'Cargar Evento');
+                break;
+            case 'create':
+
+                if(count($event) > 1){
+                    $this->Events_model->insert($event);
+                    redirect('admin/events');
+                }
+                $this->session->set_userdata([ 'section' => 'admin/events']);
+                $content = $this->parser->parse('admin/events_create',[
+                    'tags' => $this->Tags_model->getAll(),
+                    'errors' => $errors
+                ],true);
+                $this->_render($content,'Cargar Evento');
+                break;
+            case 'remove':
+                $this->News_model->delete($id);
+                redirect('admin/events');
+                break;
+            case 'view':
+                $this->session->set_userdata([ 'section' => 'admin/events']);
+                $selected = $this->Events_model->getById($id);
+                $this->debug($this->Tags_model->getOne($selected->tags));
+                $content = $this->parser->parse('admin/events_view',[
+                    'event_view' => [[
+                        'id' => $selected->id,
+                        'title' => $selected->title,
+                        'description' => $selected->description,
+                        'tags' => $this->Tags_model->getOne($selected->tags)['name'],
+                        'images' => site_url($selected->images),
+                        'date' => $selected->date,
+                    ]]
+                ],true);
+                $this->_render($content,'Eventos');
                 break;
             default:
                 $this->session->set_userdata([ 'section' => 'admin/events']);
-                $content = $this->load->view('admin/events',[],true);
+                $content = $this->parser->parse('admin/events',[
+                    'events' => $this->Events_model->latest()
+                ],true);
                 $this->_render($content,'Eventos');
                 break;
         }
+
     }
 
     public function tags($stat = '', $id = null){
@@ -306,6 +428,50 @@ class Admin extends CI_Controller{
         $this->session->set_userdata([ 'section' => 'admin/tags']);
         $this->_render($content,'Tags');
 
+    }
+
+
+    private function uploadFile($file){
+        $target_path = "uploads/";
+
+        $target_path = $target_path . basename( $_FILES[$file]['name']);
+
+        // Undefined | Multiple Files | $_FILES Corruption Attack
+        // If this request falls under any of them, treat it invalid.
+        if (!isset($_FILES[$file]['error']) || is_array($_FILES[$file]['error']) ) {
+            return ['status' => false , 'errors' => 'Archivo inválido' ];
+        }
+        switch ($_FILES[$file]['error']) {
+            case UPLOAD_ERR_OK:
+                break;
+            case UPLOAD_ERR_NO_FILE:
+                return ['status' => false , 'errors' => 'El archivo no se envió' ];
+            case UPLOAD_ERR_INI_SIZE:
+            case UPLOAD_ERR_FORM_SIZE:
+                return ['status' => false , 'errors' => 'El archivo supera el limite de peso' ];
+            default:
+                return ['status' => false , 'errors' => 'Error inesperado' ];
+        }
+
+         //You should also check filesize here.
+        if ($_FILES[$file]['size'] > 1000000) {
+            return ['status' => false , 'errors' => 'El archivo supera el limite de peso' ];
+        }
+
+        if(move_uploaded_file($_FILES[$file]['tmp_name'], $target_path)) {
+            return ['status' => ['url' => $target_path ] , 'errors' => null ];
+        } else{
+            return ['status' => false , 'errors' => 'Ocurrio un herror subiendo el archivo' ];
+        }
+
+    }
+
+    private function debug($message){
+        if(is_array($message) || is_object($message)){
+            echo "<script>console.log('".json_encode($message)."')</script>";
+        }else if(is_string($message)){
+            echo "<script>console.log('".$message."')</script>" ;
+        }
     }
 
 }

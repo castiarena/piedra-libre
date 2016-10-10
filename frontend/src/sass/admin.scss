@@ -15,29 +15,17 @@ body{
 $width : 230px;
 $padding: 20px;
 $color-base: rgba(120, 190, 160, 1);
-
 /* The animation code */
-@keyframes left {
+@keyframes fadeIn {
   from {
-    left:-100%;
+    background-color:  #fff;
   }
   to {
-    left: 0;
-  }
-}
-/* The animation code */
-@keyframes left_padding {
-  from {
-    padding-left: 0;
-  }
-  to {
-    padding-left: $width + $padding;
+    background-color: $color-base;
   }
 }
 
 .lateral-bar{
-  animation-name: left;
-  animation-duration: .8s;
   z-index: 1031;
   position: fixed;
   width: $width;
@@ -53,6 +41,9 @@ $color-base: rgba(120, 190, 160, 1);
   .active{
     background-color: $color-base;
     border-color: darken($color-base,4%);
+    animation-name: fadeIn;
+    animation-timing-function: ease-out;
+    animation-duration: .8s;
     &:hover{
       background-color: lighten($color-base,4%);
       border-color: darken($color-base,4%);
@@ -62,9 +53,7 @@ $color-base: rgba(120, 190, 160, 1);
 
 .content-logged{
   padding: 50px 20px 20px $width + $padding;
-  animation-name: left_padding;
-  animation-timing-function: ease-out;
-  animation-duration: .8s;
+
 }
 
 .logo-admin{

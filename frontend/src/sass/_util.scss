@@ -44,3 +44,10 @@
     vertical-align: middle;
   }
 }
+
+@include mobile(){
+  .row{
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

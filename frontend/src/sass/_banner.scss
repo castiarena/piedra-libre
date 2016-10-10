@@ -29,6 +29,13 @@
   background-position: center center;
 }
 
+.banner-home-3{
+  background-attachment: local ;
+  background-image: linear-gradient( rgba(0,0,0,0.1), rgba(0,0,0,0.3)) , url("../img/banner-home-3.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
 .banner-scroll{
   position: absolute;
   margin-left: -15px;

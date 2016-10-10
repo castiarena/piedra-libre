@@ -16,18 +16,21 @@
 
 </section>
 
-<section id="servicios">
+<section id="noticias">
     <div class="container container-xl">
         <h1 class="text-center">Ultimas Noticias</h1>
         <? foreach($news as $news_list):?>
             <div class="news-box-col">
             <? foreach($news_list as $new):?>
                 <div class="news-box">
+                    <?php if($new->images):?>
                     <div class="news-box-img__container">
-                        <img src="<?= site_url('assets/img/banner-home-1.jpg')?>" alt="IMG">
+                        <img src="<?= site_url( $new->images )?>" alt="IMG">
                     </div>
+                    <?php endif; ?>
                     <h2 class="news-box-title"><?= $new->title?></h2>
-                    <p><?= $new->description?></p>
+                    <p class="news-box-description"><?= substr($new->description ,0 ,200) ?>...</p>
+                    <a href="<?= site_url( 'news/views/'.$new->id )?>" class="btn btn-ghost-one">Leer +</a>
                 </div>
             <? endforeach;?>
             </div>
@@ -35,63 +38,15 @@
     </div>
 </section>
 
-
-<section id="portfolio">
-    <div class="container container-xl">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="text-center">portfolio</h1>
+<section>
+    <div class="banner banner-home-3 banner-seccion">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-right color-blanco">
+                    <p>“Creo que uno debe ir teniendo mucha confianza en la intuición que tiene. Uno llegó hasta aquí por la intuición y no por la certeza. El espíritu de Arenales es esa intuición que llega a ciegas acá. Que no se pierda ese espíritu. Que no se pierda esta cosa íntima de la noche, de la soledad, del frío, de la alegría. Porque cuando se pierde ese espíritu, yo entiendo que vamos a perder el mejor botín, el mejor tesoro que tiene Arenales. El de la intimidad donde todos nos sentimos iguales ante los demás. Y donde todos somos iguales.”</p>
+                    <h3>Yagua R</h3>
+                </div>
             </div>
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium alias, animi architecto consectetur debitis esse qui ratione sequi suscipit? Dolorum facere harum iure voluptas voluptatibus. Est molestiae numquam sunt!</p>
-            </div>
-            <div class="col-md-3"></div>
-        </div>
-    </div>
-</section>
-
-<section id="creativos">
-    <div class="container container-xl">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="text-center">creativos</h1>
-            </div>
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium alias, animi architecto consectetur debitis esse qui ratione sequi suscipit? Dolorum facere harum iure voluptas voluptatibus. Est molestiae numquam sunt!</p>
-            </div>
-            <div class="col-md-3"></div>
-        </div>
-    </div>
-</section>
-
-<section id="clientes">
-    <div class="container container-xl">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="text-center">clientes</h1>
-            </div>
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium alias, animi architecto consectetur debitis esse qui ratione sequi suscipit? Dolorum facere harum iure voluptas voluptatibus. Est molestiae numquam sunt!</p>
-            </div>
-            <div class="col-md-3"></div>
-        </div>
-    </div>
-</section>
-
-<section id="contacto">
-    <div class="container container-xl">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="text-center">contacto</h1>
-            </div>
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium alias, animi architecto consectetur debitis esse qui ratione sequi suscipit? Dolorum facere harum iure voluptas voluptatibus. Est molestiae numquam sunt!</p>
-            </div>
-            <div class="col-md-3"></div>
         </div>
     </div>
 </section>

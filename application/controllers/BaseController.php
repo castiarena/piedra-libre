@@ -16,7 +16,7 @@ abstract class BaseController extends CI_Controller{
     }
 
     public function _render($content, $title){
-        if(!$this->session->userdata('development')){
+        if(!$this->session->userdata('development') && ENVIRONMENT === 'production'){
             if(WIP){
                 $data = [
                     'title' => 'Piedra libre - En construccion' ,
@@ -47,7 +47,7 @@ abstract class BaseController extends CI_Controller{
                 'subnav' => [
                     ['name' => 'Fundadores', 'url' => site_url('quienes-somos/fundadores')],
                     ['name' => 'Objeto de la fundación', 'url' => site_url('quienes-somos/objeto-de-la-fundacion')],
-                    ['name' => 'Consejo de Administracion Actual', 'url' => site_url('quienes-somos/consejo-de-administracion-actual')]
+                    ['name' => 'Administracion', 'url' => site_url('quienes-somos/administracion')]
                 ]
             ],
             ['name' => 'Noticias' , 'url' => site_url('news'), 'active' => $section == 'news' ? 'active' : '' ,

@@ -4,6 +4,7 @@ class News_model extends CI_Model{
     public function __construct()
     {
         parent::__construct();
+        $this->load->helper('date');
     }
 
     public function latest($cant = 10){
@@ -14,7 +15,8 @@ class News_model extends CI_Model{
     public function getById($id){
         $this->db->where('id', $id);
         $query = $this->db->get('news');
-        return $query ? $query->result() : [];
+
+        return $query ? $query->row() : [];
     }
 
     private function prepare($info){
@@ -22,6 +24,7 @@ class News_model extends CI_Model{
             'title' => $info['title'],
             'description' => $info['description'],
             'date' => $info['date'],
+            'created' => date('Y-m-d H:i:s',now()),
             'images' => $info['image'],
             'tags' => $info['tag']
         ];
@@ -33,6 +36,16 @@ class News_model extends CI_Model{
 
     public function update($info){
         $this->db->update('news', $this->prepare($info), ['id' => $info['id']]);
+    }
+
+    public function delete($id){
+        $this->db->where('id', $id);
+        $this->db->delete('news');
+    }
+
+    public function countAll(){
+        $query = $this->db->get('news');
+        return count($query->result());
     }
 }
 ?>

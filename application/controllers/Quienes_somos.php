@@ -27,8 +27,8 @@ class Quienes_somos extends BaseController{
         $this->_render($content, 'Quienes somos - Objeto de la fundación');
     }
 
-    public function consejo_de_administracion_actual(){
-        $content = $this->load->view('quienes-somos/consejo-de-administracion-actual', [] ,true);
+    public function administracion(){
+        $content = $this->load->view('quienes-somos/administracion', [] ,true);
         $this->_render($content, 'Quienes somos - Consejo de administracion actual');
     }
 

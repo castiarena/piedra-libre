@@ -35,5 +35,34 @@
     <?= $content ?>
 </main>
 
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector: 'textarea',
+        height: 'auto',
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor textcolor colorpicker',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table contextmenu paste code'
+        ],
+        toolbar: 'forecolor backcolor | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+        content_css: '//www.tinymce.com/css/codepen.min.css'
+    });
+
+
+    (function(win, doc){
+        'use strict';
+        var confirmLinks = doc.querySelectorAll('[data-confirm]');
+
+        for(var i = 0; i < confirmLinks.length; i++){
+            confirmLinks[i].addEventListener('click',function(event){
+
+                if(!confirm('Estas seguro que desea eliminar esta noticia?, no vas a poder recuperarla')){
+                    event.preventDefault();
+                }
+            });
+        }
+    })(window,document)
+</script>
 </body>
 </html>

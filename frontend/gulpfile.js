@@ -2,7 +2,8 @@ var gulp = require('gulp'),
     fs = require('fs'),
     sass = require('gulp-sass'),
     autoPrefixer = require('gulp-autoprefixer'),
-    concat = require('gulp-concat');
+    concat = require('gulp-concat'),
+    sourcemaps = require('gulp-sourcemaps');
 
 
 gulp.task('build',function(){
@@ -12,7 +13,7 @@ gulp.task('build',function(){
 });
 
 gulp.task('js:build',function(){
-    gulp.src(['./node_modules/jquery/dist/jquery.js', './node_modules/handlebars/dist/handlebars.js', './src/js/*.js' ])
+    gulp.src(['./node_modules/jquery/dist/jquery.js', './node_modules/handlebars/dist/handlebars.js', './/node_modules/bootstrap-sass/assets/javascripts/bootstrap/modal.js', './src/js/*.js' ])
         .pipe(concat('site.js'))
         .pipe(gulp.dest('../assets/js/'));
 });
@@ -36,7 +37,9 @@ gulp.task('assets:build',function(){
 
 gulp.task('css:build',function(){
     gulp.src('./src/sass/styles.scss')
+        .pipe(sourcemaps.init())
         .pipe(sass())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('../assets/css'));
     gulp.src('./src/sass/icons.scss')
         .pipe(sass())
@@ -44,7 +47,9 @@ gulp.task('css:build',function(){
 
     // Admin
     gulp.src('./src/sass/admin.scss')
+        .pipe(sourcemaps.init())
         .pipe(sass())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('../assets/css'));
 });
 

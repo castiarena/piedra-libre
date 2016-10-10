@@ -4,9 +4,14 @@ class Tags_model extends CI_Model{
     public function __construct()
     {
         parent::__construct();
+        $this->load->helper('date');
     }
 
-    public function insert($data){
+    public function insert($info){
+        $data =  [
+            'created' => date('Y-m-d H:i:s', now()),
+            'name' => $info['name']
+        ];
         $this->db->insert('tag', $data);
     }
 
@@ -18,6 +23,11 @@ class Tags_model extends CI_Model{
     public function getAll(){
         $query = $this->db->get('tag');
         return $query->result();
+    }
+
+    public function countAll(){
+        $query = $this->db->get('tag');
+        return count($query->result());
     }
 
     public function getAllWithUsage(){
