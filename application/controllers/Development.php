@@ -15,11 +15,7 @@ class Development extends CI_Controller{
 
     public function index(){
 
-        if($this->session->userdata('development')){
-            $this->session->set_userdata([
-                'development' => false
-            ]);
-        }
+
 
         if($this->input->post('password') === 'fundpiedralibre:ntp07Ns1R9'){
             $this->session->set_userdata([
