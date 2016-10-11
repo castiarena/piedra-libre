@@ -18,7 +18,7 @@
                 <h1 class="text-center">Acceso al sitio</h1>
             </div>
             <div class="col-md-4 col-md-offset-4">
-                <form action="development" method="post">
+                <form action="<?= site_url('development')?>" method="post">
                     <div class="form-group">
                         <div class="input-group">
                             <input type="password" name="password" class="form-control">
