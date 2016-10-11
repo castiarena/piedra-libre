@@ -25,7 +25,7 @@ class Development extends CI_Controller{
             $this->session->set_userdata([
                 'development' => true
             ]);
-            redirect('');
+            redirect(site_url(''));
         }else{
             $this->session->set_userdata([
                 'development' => false
