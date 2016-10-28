@@ -43,6 +43,7 @@ abstract class BaseController extends CI_Controller{
         $section = $this->session->userdata('section');
 
         return [
+            ['name' => 'Inicio' , 'url' => site_url(''), 'active' => '' ],
             ['name' => 'Quienes Somos', 'url' => site_url('quienes-somos') , 'active' => $section == 'home' ? 'active' : '' ,
                 'subnav' => [
                     ['name' => 'Fundadores', 'url' => site_url('quienes-somos/fundadores')],
