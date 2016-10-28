@@ -19,6 +19,13 @@ class News_model extends CI_Model{
         return $query ? $query->row() : [];
     }
 
+    public function getOne($id){
+        $this->db->where('id', $id);
+        $query = $this->db->get('news');
+
+        return $query ? $query->result() : [];
+    }
+
     private function prepare($info){
         return [
             'title' => $info['title'],

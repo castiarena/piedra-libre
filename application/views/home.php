@@ -30,7 +30,7 @@
                     <?php endif; ?>
                     <h2 class="news-box-title"><?= $new->title?></h2>
                     <p class="news-box-description"><?= substr($new->description ,0 ,200) ?>...</p>
-                    <a href="<?= site_url( 'news/views/'.$new->id )?>" class="btn btn-ghost-one">Leer +</a>
+                    <a href="<?= site_url( 'news/view/'.$new->id )?>" class="btn btn-ghost-one">Leer +</a>
                 </div>
             <? endforeach;?>
             </div>
