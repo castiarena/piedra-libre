@@ -38,7 +38,7 @@ var app = (function(win,doc){
                 tempLogos.default = new Image();
                 tempLogos.default.src = config.root + 'assets/img/logo.svg';
                 $(win).on('scroll',function(){
-                    if(doc.querySelector('body').scrollTop >  (win.innerHeight - 90) ){
+                    if(doc.querySelector('body').scrollTop >  (win.innerHeight - 90) || doc.querySelector('html').scrollTop > (win.innerHeight - 90) ){
                         if( !$(header).hasClass('header-menu__scrolled')){
                             $(header).addClass('header-menu__scrolled');
                         }

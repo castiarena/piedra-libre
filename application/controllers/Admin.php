@@ -47,8 +47,10 @@ class Admin extends CI_Controller{
 
         return [
             ['name' => 'Inicio', 'url' => site_url('admin') , 'active' => $section == 'admin/home' ? 'active' : '' ],
+            ['name' => 'Usuarios' , 'url' => site_url('admin/users'), 'active' => $section == 'admin/users' ? 'active' : '' ],
             ['name' => 'Noticias' , 'url' => site_url('admin/news'), 'active' => $section == 'admin/news' ? 'active' : '' ],
             ['name' => 'Eventos' , 'url' => site_url('admin/events'), 'active' => $section == 'admin/events' ? 'active' : '' ],
+            ['name' => 'Proyectos' , 'url' => site_url('admin/proyects'), 'active' => $section == 'admin/proyects' ? 'active' : '' ],
             ['name' => 'Tags' , 'url' => site_url('admin/tags'), 'active' => $section == 'admin/tags' ? 'active' : '' ]
         ];
     }
@@ -99,11 +101,15 @@ class Admin extends CI_Controller{
         $content = $this->load->view('admin/logged', [
             'tagsCount' => $this->Tags_model->countAll(),
             'eventsCount' => $this->Events_model->countAll(),
-            'newsCount' => $this->News_model->countAll()
+            'newsCount' => $this->News_model->countAll(),
+            'adminsCount' => $this->Users_model->countAll('admin'),
+            'membersCount' => $this->Users_model->countAll('member')
         ], true);
         $this->_render($content, 'Bienvenido!');
 
     }
+
+
 
     public function create(){
 
@@ -430,6 +436,14 @@ class Admin extends CI_Controller{
 
     }
 
+    public function users(){
+        $content =  $this->parser->parse('admin/users',[
+            'users' => $this->Users_model->getAll()
+        ],true);
+        $this->session->set_userdata([ 'section' => 'admin/users']);
+        $this->_render($content,'Tags');
+    }
+
 
     private function uploadFile($file){
         $target_path = "uploads/";
@@ -454,7 +468,7 @@ class Admin extends CI_Controller{
         }
 
          //You should also check filesize here.
-        if ($_FILES[$file]['size'] > 1000000) {
+        if ($_FILES[$file]['size'] > 5000000) {
             return ['status' => false , 'errors' => 'El archivo supera el limite de peso' ];
         }
 

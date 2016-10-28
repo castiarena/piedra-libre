@@ -41,4 +41,8 @@ class News extends BaseController{
         $content = $this->load->view('news/index', [] ,true);
         $this->_render($content, 'Noticias - '.$method);
     }
+
+    public function view($id){
+
+    }
 }
