@@ -33,4 +33,14 @@ https://github.com/castiarena/piedra-libre/blob/develop/application/config/.dump
 
 Correr http://localhost/piedra-libre/
 
+# Subiendo cambios a produccion
 
+Teniendo instalado git-ftp, hay que configurarlo:
+
+``
+$ git config git-ftp.url <dominio>
+$ git config git-ftp.user <usuario>
+$ git config git-ftp.password <password>
+``
+
+* ususario pasword y dominio para el ftp se envian por privado *
