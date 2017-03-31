@@ -26,19 +26,14 @@ class Admin extends CI_Controller{
             $user = null;
         }
 
-        if(!$this->session->userdata('development')  && ENVIRONMENT === 'production'){
-            if(WIP){
-                redirect('');
-            }
-        }else{
-            $data = [
-                'title' => 'Piedra libre - '. $title ,
-                'content' => $content,
-                'user' => $user,
-                'navigation' => $this->getNavigation()
-            ];
-            $this->parser->parse('admin/layout' , $data);
-        }
+        $data = [
+            'title' => 'Piedra libre - '. $title ,
+            'content' => $content,
+            'user' => $user,
+            'navigation' => $this->getNavigation()
+        ];
+        $this->parser->parse('admin/layout' , $data);
+
 
     }
 

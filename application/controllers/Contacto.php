@@ -16,4 +16,8 @@ class Contacto extends BaseController{
         $content = $this->load->view('contacto', [] ,true);
         $this->_render($content, 'Contacto');
     }
+
+    public function send(){
+
+    }
 }
