@@ -5,7 +5,7 @@
         <div class="container text-center">
             <div class="col-md-6 col-md-offset-3">
                 <h2 class="header-title font-title text-uppercase">
-                    <strong>Facu comilon</strong></h2>
+                    <strong>404</strong></h2>
                 <br><br>
                 <p class="color-blanco font-title text-uppercase">Lo sentimos no sabemos lo que esta buscando</p>
             </div>
