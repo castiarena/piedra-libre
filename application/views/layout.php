@@ -85,7 +85,7 @@
         </div>
         <div class="row footer-register">
             <div class="col-md-12">
-                <h6 class="text-center">Piedra Libre - Fundación - Mendonza Arenales <i class="fa fa-copyright"></i> 2016</h6>
+                <h6 class="text-center">Piedra Libre - Fundación - Mendoza Arenales <i class="fa fa-copyright"></i> 2016</h6>
             </div>
 
         </div>
