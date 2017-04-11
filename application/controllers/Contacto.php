@@ -29,7 +29,7 @@ class Contacto extends BaseController{
     private function send(){
 
         $this->email->from('webmaster@fundacionpiedralibre.org', $this->input->post('name') . ' '. $this->input->post('lastname'));
-        $this->email->to('castiarena@gmail.com');
+        $this->email->to('fundacionarenales@gmail.com');
 
         $this->email->subject('Contacto desde fundacionpiedralibre.org - ' . $this->input->post('subject'));
 
