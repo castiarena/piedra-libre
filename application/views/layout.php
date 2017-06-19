@@ -55,7 +55,7 @@
                 <div class="col-lg-6">
                     <nav class="footer-nav">
                         <div class="footer-nav__item">
-                            <a href="facebook.com" class="footer-nav__link">
+                            <a href="https://www.facebook.com/fundacionpiedralibre/" target="_blank" class="footer-nav__link">
                                 Facebook <i class="fa fa-facebook-square"></i>
                             </a>
                         </div>
