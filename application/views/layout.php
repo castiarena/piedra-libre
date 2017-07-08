@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= $title ?></title>
+
+    <meta property="og:url" content="<?= base_url(uri_string())?>" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="<?= $title?> " />
+    <meta property="og:description" content="Creo que uno debe ir teniendo mucha confianza en la intuición que tiene. Uno llegó hasta aquí por la intuición y no por la certeza. El espíritu de Arenales es esa intuición que llega a ciegas acá. Que no se pierda ese espíritu. Que no se pierda esta cosa íntima de la noche, de la soledad, del frío, de la alegría. Porque cuando se pierde ese espíritu, yo entiendo que vamos a perder el mejor botín, el mejor tesoro que tiene Arenales. El de la intimidad donde todos nos sentimos iguales ante los demás. Y donde todos somos iguales." />
+    <meta property="og:image" content="<?= site_url('assets/img/og-image.png')?>" />
+
     <link rel="stylesheet" href="<?= site_url('assets/css/styles.css')?>">
     <link rel="stylesheet" href="<?= site_url('assets/css/font-awesome.css')?>">
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab|Rubik|Lato:400,300,100,700,900' rel='stylesheet' type='text/css'>

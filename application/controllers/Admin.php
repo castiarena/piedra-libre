@@ -16,12 +16,20 @@ class Admin extends CI_Controller{
     }
 
     private function _render($content, $title = 'Admin'){
-        if($this->session->userdata('logged')){
-            $user = [
-                'name' => $this->session->userdata('username'),
-                'email' => $this->session->userdata('useremail'),
-                'notifications' => [1,2]
-            ];
+        if($this->session->userdata('logged') || ENVIRONMENT === 'development'){
+            if(ENVIRONMENT !== 'development'){
+                $user = [
+                    'name' => $this->session->userdata('username'),
+                    'email' => $this->session->userdata('useremail'),
+                    'notifications' => [1,2]
+                ];
+            }else{
+                $user = [
+                    'name' => 'development',
+                    'email' => 'development@mail.com',
+                    'notifications' => [1,2]
+                ];
+            }
         }else{
             $user = null;
         }
@@ -60,7 +68,6 @@ class Admin extends CI_Controller{
         $pass = $this->input->post('password');
         $errors = [];
 
-
         if($this->form_validate->run()) {
             if($this->access($email,$pass)){
                 $logged = true;
@@ -69,7 +76,7 @@ class Admin extends CI_Controller{
                 $logged = false;
             }
         }else{
-            $logged = false;
+            $logged = ENVIRONMENT === 'development' ? true : false;
             $errors = $this->form_validate->error_array();
         }
 
@@ -84,7 +91,7 @@ class Admin extends CI_Controller{
     }
 
     public function logged(){
-        $logged = $this->session->userdata('logged');
+        $logged = ENVIRONMENT === 'development' ? true : $this->session->userdata('logged');
 
         if(!$logged){
             redirect('admin');
@@ -140,7 +147,9 @@ class Admin extends CI_Controller{
     }
 
     private function access( $email, $pass){
-
+        if(ENVIRONMENT == 'development'){
+            return true;
+        }
         $user = $this->Users_model->getUser($email, $pass);
         if(count($user) === 0){
             $userData = array(
