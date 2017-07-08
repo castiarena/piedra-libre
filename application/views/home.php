@@ -7,7 +7,7 @@
                 <h2 class="header-title font-title text-uppercase">Fundación -  <strong>Piedra Libre</strong></h2>
                 <h4 class="color-blanco font-l">Libre acceso al <i>"Cajón de los Arenales".</i></h4>
                 <br>
-                <a href="#" class="btn btn-ghost-two">Conocé mas</a>
+                <a href="<?= site_url('quienes-somos/objeto-de-la-fundacion')?>" class="btn btn-ghost-two">Conocé mas</a>
                 <br>
             </div>
         </div>

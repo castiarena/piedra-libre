@@ -12,21 +12,15 @@
             <? } ?>
             <?= form_open('admin')?>
             <div class="form-group">
-                <?= form_input([
-                    'value' => $email,
-                    'name' => 'email' ,
-                    'placeholder' => 'email',
-                    'class' => 'form-control'
-                ])?>
+                <input type="email" placeholder="email" class="form-control"
+                       name="email" value="<?=$email?>">
                 <? if(isset($errors['email'])){?>
                     <p class="text-danger"> <small><?=$errors['email']?></small></p>
                 <? } ?>
             </div>
             <div class="form-group">
-                <?= form_password([
-                    'name' => 'password' ,
-                    'placeholder' => 'password',
-                    'class' => 'form-control'])?>
+                <input type="password" placeholder="password" class="form-control"
+                       name="password">
                 <? if(isset($errors['password'])){?>
                     <p class="text-danger"> <small><?=$errors['password']?></small></p>
                 <? } ?>
