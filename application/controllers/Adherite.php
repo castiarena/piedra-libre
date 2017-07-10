@@ -27,7 +27,7 @@ class Adherite extends BaseController{
 
 
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
-        $this->form_validation->set_message('is_unique', 'Ese %s ya esta registrado');
+        $this->form_validation->set_message('is_unique', 'El email: <strong>'.$this->input->post('email').'</strong> ya esta registrado, por favor intenta con otro');
         $this->form_validation->set_rules('name', 'Nombre', 'required');
         $this->form_validation->set_rules('last_name', 'Apellido', 'required');
         $this->form_validation->set_rules('document', 'Documento', 'required');
