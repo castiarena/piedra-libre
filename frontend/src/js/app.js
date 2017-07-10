@@ -4,7 +4,37 @@ var app = (function(win,doc){
     var config = {
             root: doc.querySelector('[data-root]') ? doc.querySelector('[data-root]').value : win.location
         },
+        templates = {
+            message_form: function(text){
+                return "<div class='container-xs form-validation'>" +
+                            "<span class='label label-danger'>" +
+                                text +
+                            "</span>" +
+                        "</div>";
+            }
+        },
         _ = {
+            forms: function(){
+                $('form').validate();
+                $('input[required]').each(function(){
+                    $(this).rules('add',{
+                        messages: {
+                            required: templates.message_form("Este campo es obligatorio")
+                        }
+                    });
+                });
+
+                $('input[data-number]').each(function(){
+                    $(this).rules('add',{
+                        number: true,
+                        messages: {
+                            minlength: templates.message_form("Debe ingresar al menos {0} caracter"),
+                            number: templates.message_form("Debe ingresar un número")
+                        }
+                    });
+                });
+
+            },
             carousel : function(querySelector){
                 var elem = doc.querySelector(querySelector);
                 if(elem){
@@ -48,6 +78,9 @@ var app = (function(win,doc){
                         $(header).removeClass('header-menu__scrolled');
                     }
                 });
+            },
+            date_picker: function(selector){
+                $(selector).datepicker();
             }
         };
 
@@ -57,6 +90,8 @@ var app = (function(win,doc){
             _.carousel('[data-slider]');
             _.menu();
             _.scrollControl();
+            _.date_picker('input[data-date--picker]');
+            _.forms();
         }
     };
 

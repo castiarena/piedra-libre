@@ -13,7 +13,14 @@ gulp.task('build',function(){
 });
 
 gulp.task('js:build',function(){
-    gulp.src(['./node_modules/jquery/dist/jquery.js', './node_modules/handlebars/dist/handlebars.js', './/node_modules/bootstrap-sass/assets/javascripts/bootstrap/modal.js', './src/js/*.js' ])
+    gulp.src([
+        './node_modules/jquery/dist/jquery.js',
+        './node_modules/handlebars/dist/handlebars.js',
+        './node_modules/bootstrap-sass/assets/javascripts/bootstrap.js'])
+        .pipe(concat('dep.js'))
+        .pipe(gulp.dest('../assets/js/'));
+
+    gulp.src('./src/js/*.js' )
         .pipe(concat('site.js'))
         .pipe(gulp.dest('../assets/js/'));
 });

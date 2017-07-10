@@ -2,8 +2,7 @@
 
 class Users_model extends CI_Model{
 
-    public function __construct()
-    {
+    public function __construct(){
         parent::__construct();
     }
 
@@ -24,6 +23,7 @@ class Users_model extends CI_Model{
         $query = $this->db->get('users');
         return $query->result();
     }
+
     public function countAll($type = null){
         if($type != null){
             $this->db->where('type', $type);

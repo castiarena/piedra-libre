@@ -12,7 +12,7 @@
 <section>
     <div class="container container-xl">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-sm-8 col-sm-offset-2">
                 <h2 class="font-title">Objeto de la Fundación Piedra Libre:</h2>
                 <p><strong class="font-title text-uppercase">a .</strong> Proteger espacios físicos que por sus características naturales sean aptos para las prácticas del montañismo y la escalada, promoviendo las prácticas para el cuidado del medio ambiente, preservando la naturaleza original de estos escenarios, garantizando la accesibilidad y colaborando activamente con la gestión de un uso armónico y sustentable.</p>
                 <p><strong class="font-title text-uppercase">b .</strong> Desarrollar prácticas que propendan a enseñar al hombre a desempeñarse en las actividades relacionadas al montañismo que propendan al esparcimiento, recreación y el bienestar psico-físico de los mismos.</p>
@@ -26,6 +26,9 @@
                 <p><strong class="font-title text-uppercase">j .</strong> Propender a la creación de nuevas rutas de escalada y senderos de montaña.</p>
                 <p><strong class="font-title text-uppercase">k .</strong> Colaborar con el mantenimiento de rutas de escaladas y senderos ya existentes.</p>
                 <p><strong class="font-title text-uppercase">l .</strong> Propiciar convenios con empresas privadas que desarrollen actividades turísticas.</p>
+            </div>
+            <div class="col-sm-8 col-sm-offset-2">
+                <a href="<?= site_url('adherite')?>" class="btn btn-info">Sumate a la fundación ahora!</a>
             </div>
         </div>
     </div>

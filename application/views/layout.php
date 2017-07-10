@@ -13,6 +13,7 @@
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.standalone.min.css">
     <link rel="stylesheet" href="<?= site_url('assets/css/styles.css')?>">
     <link rel="stylesheet" href="<?= site_url('assets/css/font-awesome.css')?>">
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab|Rubik|Lato:400,300,100,700,900' rel='stylesheet' type='text/css'>
@@ -110,6 +111,10 @@
     ga('send', 'pageview');
 
 </script>
+<script src="<?= site_url('assets/js/dep.js') ?>"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.ar.min.js"></script>
 <script src="<?= site_url('assets/js/site.js') ?>"></script>
 </body>
 </html>

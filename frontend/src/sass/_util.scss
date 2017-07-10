@@ -51,3 +51,7 @@
     margin-right: 0;
   }
 }
+
+[data-date--picker][readonly]{
+  background-color: #fff;
+}

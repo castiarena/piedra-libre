@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title> {title}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.standalone.min.css">
     <link rel="stylesheet" href="<?= site_url('assets/css/admin.css')?>">
+
 </head>
 <body>
 <? if(isset($user)){ ?>
@@ -34,7 +36,7 @@
 <main <? if(isset($user)){ ?> class="content-logged" <? }?>>
     <?= $content ?>
 </main>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.ar.min.js"></script>
 <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 <script>
     tinymce.init({
