@@ -12,7 +12,7 @@ class Adherite extends BaseController{
     {
         parent::__construct();
         $this->load->library('form_validation');
-        $this->load->model('users_model');
+        $this->load->model('Users_model');
         $this->load->library('parser');
 
     }
@@ -46,7 +46,7 @@ class Adherite extends BaseController{
                     "! ya formas parte de los amigos de la fundación, estamos en contacto
                 </div>";
             $birth_date = date("Y-m-d H:i:s",strtotime( $this->input->post('birth')));
-            $this->users_model->create([
+            $this->Users_model->create([
                 "type" => "friend",
                 "email" => $this->input->post('email'),
                 "nickname" => $this->input->post('name') .'_'.$this->input->post('last_name').'_'.$this->input->post('document'),
