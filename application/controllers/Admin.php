@@ -7,7 +7,7 @@ class Admin extends CI_Controller{
         $this->load->helper('form');
         $this->load->helper('url');
         $this->load->library('session');
-        $this->load->model('Users_model');
+        $this->load->model('users_model');
         $this->load->model('News_model');
         $this->load->model('Tags_model');
         $this->load->model('Events_model');
@@ -104,8 +104,8 @@ class Admin extends CI_Controller{
             'tagsCount' => $this->Tags_model->countAll(),
             'eventsCount' => $this->Events_model->countAll(),
             'newsCount' => $this->News_model->countAll(),
-            'adminsCount' => $this->Users_model->countAll('admin'),
-            'membersCount' => $this->Users_model->countAll('member')
+            'adminsCount' => $this->users_model->countAll('admin'),
+            'membersCount' => $this->users_model->countAll('member')
         ], true);
         $this->_render($content, 'Bienvenido!');
 
@@ -129,7 +129,7 @@ class Admin extends CI_Controller{
             $email          = $this->input->post('email');
 
 
-            $this->Users_model->create([
+            $this->users_model->create([
                 'name' => $name,
                 'password' => $pass,
                 'nickname' => $nickName,
@@ -150,7 +150,7 @@ class Admin extends CI_Controller{
         if(ENVIRONMENT == 'development'){
             return true;
         }
-        $user = $this->Users_model->getUser($email, $pass);
+        $user = $this->users_model->getUser($email, $pass);
         if(count($user) === 0){
             $userData = array(
                 'username'  => null,
@@ -442,7 +442,7 @@ class Admin extends CI_Controller{
 
     public function users(){
         $content =  $this->parser->parse('admin/users',[
-            'users' => $this->Users_model->getAll()
+            'users' => $this->users_model->getAll()
         ],true);
         $this->session->set_userdata([ 'section' => 'admin/users']);
         $this->_render($content,'Tags');
