@@ -42,7 +42,7 @@ class Home extends BaseController{
 
     private function guideList(){
         $path = 'assets/downloads/guia';
-        $files = directory_map("./$path");
+        $files = directory_map(str_replace("/application/controllers/","/",__DIR__."/$path"));
         $i = 0;
         foreach($files as $file):
             $files[$i] = [
