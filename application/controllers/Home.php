@@ -6,6 +6,8 @@ class Home extends BaseController{
     {
         parent::__construct();
         $this->load->model('News_model');
+        $this->load->helper('directory');
+
     }
 
     public function index(){
@@ -32,8 +34,32 @@ class Home extends BaseController{
             }
         }
         $content = $this->load->view('home', [
-            'news' => [ $news_list1, $news_list2, $news_list3 ]
+            'news' => [ $news_list1, $news_list2, $news_list3 ],
+            'guideList' => $this->guideList()
         ] ,true);
         $this->_render($content, 'Home');
+    }
+
+    private function guideList(){
+        $path = 'assets/downloads/guia';
+        $files = directory_map("./$path");
+        foreach($files as $i => $file):
+            $files[$i] = [
+                "href" => site_url("$path/$file"),
+                "safeName" => $file,
+                "name" => $file,
+                "size" => $this->fileSize(
+                    str_replace("/application/controllers/","/",__DIR__."/$path/$file")
+                )
+            ];
+        endforeach;
+        return $files;
+    }
+
+    private function fileSize($path){
+        $size = filesize($path);
+        $units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+        $power = $size > 0 ? floor(log($size, 1024)) : 0;
+        return number_format($size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];
     }
 }

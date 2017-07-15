@@ -38,6 +38,31 @@
     </div>
 </section>
 
+<section class="bg-four">
+    <div class="container container-xl">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3 container-l text-center">
+                <h1 class="text-center">Guía de sectores</h1>
+                <h3 class="color-blanco">Descagarte en pdf la guia de de cada sector para recorrerlos, a concienia
+                    y respetando el entorno visual, sonoro y a los todos los que tambien esten
+                    recorriendolo: </h3>
+            </div>
+        </div>
+        <div class="row">
+            <? foreach($guideList as $guide):?>
+            <div class="col-sm-3">
+                <a href="<?= $guide["href"]?>" class="btn-pdf-download" target="_blank">
+                    <span class="fa fa-file-pdf-o"></span>
+                    <span><?=$guide["name"]?> </span>
+
+                    <span> <?=$guide["size"]?></span>
+                </a>
+            </div>
+            <? endforeach;?>
+        </div>
+    </div>
+</section>
+
 <section>
     <div class="banner banner-home-3 banner-seccion">
         <div class="container">

@@ -7,12 +7,13 @@ var gulp = require('gulp'),
 
 
 gulp.task('build',function(){
-    gulp.start('css:build');
-    gulp.start('assets:build');
-    gulp.start('js:build');
+    gulp.start('build:css')
+        .start('build:assets')
+        .start('build:js')
+        .start('build:downloads')
 });
 
-gulp.task('js:build',function(){
+gulp.task('build:js',function(){
     gulp.src([
         './node_modules/jquery/dist/jquery.js',
         './node_modules/handlebars/dist/handlebars.js',
@@ -25,7 +26,7 @@ gulp.task('js:build',function(){
         .pipe(gulp.dest('../assets/js/'));
 });
 
-gulp.task('assets:build',function(){
+gulp.task('build:assets',function(){
     fs.rmdir('./build/img',function(){
         gulp.src('./src/img/**/*')
             .pipe(gulp.dest('../assets/img/'));
@@ -42,7 +43,7 @@ gulp.task('assets:build',function(){
 
 });
 
-gulp.task('css:build',function(){
+gulp.task('build:css',function(){
     gulp.src('./src/sass/styles.scss')
         .pipe(sourcemaps.init())
         .pipe(sass())
@@ -62,8 +63,12 @@ gulp.task('css:build',function(){
 
 gulp.task('watch' ,function(){
     gulp.start('build');
-    gulp.watch('./src/img/**/*',['assets:build']);
-    gulp.watch('./src/sass/**/*',['css:build']);
-    gulp.watch('./src/js/**/*',['js:build']);
+    gulp.watch('./src/img/**/*',['build:assets']);
+    gulp.watch('./src/sass/**/*',['build:css']);
+    gulp.watch('./src/js/**/*',['build:js']);
 });
 
+gulp.task('build:downloads', function(){
+    gulp.src('./src/downloads/**/*')
+        .pipe(gulp.dest('../assets/downloads'));
+});
