@@ -7,7 +7,7 @@ class Home extends BaseController{
         parent::__construct();
         $this->load->model('News_model');
         $this->load->helper('directory');
-        $this->load->helper('url');
+
     }
 
     public function index(){
@@ -42,11 +42,8 @@ class Home extends BaseController{
 
     private function guideList(){
         $path = 'assets/downloads/guia';
-        $files = directory_map(str_replace("/application/controllers/","/",__DIR__."/$path"));
-        var_dump($files);
-        die();
-        $i = 0;
-        foreach($files as $file):
+        $files = directory_map("./$path");
+        foreach($files as $i => $file):
             $files[$i] = [
                 "href" => site_url("$path/$file"),
                 "safeName" => $file,
@@ -55,7 +52,6 @@ class Home extends BaseController{
                     str_replace("/application/controllers/","/",__DIR__."/$path/$file")
                 )
             ];
-        $i++;
         endforeach;
         return $files;
     }
