@@ -7,7 +7,7 @@ class Home extends BaseController{
         parent::__construct();
         $this->load->model('News_model');
         $this->load->helper('directory');
-
+        $this->load->helper('url');
     }
 
     public function index(){
