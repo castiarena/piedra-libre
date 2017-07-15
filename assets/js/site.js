@@ -84,6 +84,40 @@ var app = (function(win,doc){
             }
         };
 
+    _.newsletter = function(){
+        console.log('ada');
+        $('.newsletter-subscribe').on('submit',function(event){
+            event.preventDefault();
+            var btn = this.querySelector('[type="submit"]');
+            var textButton = btn.innerHTML;
+            var textLoading = btn.getAttribute('data-loading-text');
+            btn.innerHTML = textLoading;
+
+            var url = this.getAttribute('action');
+            var email = this.querySelector('[type="email"]');
+            if(!email.value.match(/(.*)@(.*)\.(.*)/g)){
+                btn.innerHTML = textButton;
+                return;
+            }
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    email: email.value
+                }
+            }).then(function(data){
+                console.log(data);
+            }).catch(function(error){
+                console.log(error);
+            }).always(function(){
+                setTimeout(function(){
+                    btn.innerHTML = textButton;
+                }, 500);
+            });
+        });
+    };
+
     return {
 
         init : function(){
@@ -92,6 +126,7 @@ var app = (function(win,doc){
             _.scrollControl();
             _.date_picker('input[data-date--picker]');
             _.forms();
+            _.newsletter();
         }
     };
 

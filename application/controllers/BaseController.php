@@ -24,6 +24,17 @@ abstract class BaseController extends CI_Controller{
         $this->load->view('layout' ,$data);
     }
 
+    protected function json($data, $status = 200){
+        $response = [
+            'status' => $status,
+            'data' => $data
+        ];
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header($status)
+            ->set_output(json_encode($response));
+    }
+
     public function getNavigation(){
         $section = $this->session->userdata('section');
 

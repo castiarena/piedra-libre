@@ -68,40 +68,35 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-lg-4">
-                <div class="col-lg-6">
+            <div class="col-sm-4">
+                <? foreach($navigation as $i => $nav):?>
+                <div class="col-sm-6">
                     <nav class="footer-nav">
-                        <? foreach($navigation as $nav){?>
                         <div class="footer-nav__item">
                             <a href="<?= $nav['url'] ?>" class="footer-nav__link">
                                 <?= $nav['name'] ?>
                             </a>
                         </div>
-                        <? } ?>
-                    </nav>
-                </div>
-                <div class="col-lg-6">
-                    <nav class="footer-nav">
+                        <? if($i == count($navigation) - 2):?>
                         <div class="footer-nav__item">
                             <a href="https://www.facebook.com/fundacionpiedralibre/" target="_blank" class="footer-nav__link">
                                 Facebook <i class="fa fa-facebook-square"></i>
                             </a>
                         </div>
+                        <?endif;?>
                     </nav>
                 </div>
+                <? endforeach; ?>
 
             </div>
-            <div class="col-lg-4">
+            <div class="col-sm-4">
                 <img src="<?= site_url('assets/img/iso.svg')?>" alt="" width="300" class="center-block">
             </div>
-            <div class="col-lg-4">
-                <div class="input-group">
-                    <span class="input-group-btn">
-                    <button class="btn " type="button">Newsletter</button>
-                    </span>
-                    <input type="text" class="form-control" placeholder="Tu email...">
-                </div><!-- /input-group -->
-                <br>
+            <div class="col-sm-4">
+                <!--form action="<?= site_url('newsletter/add')?>" class="row newsletter-subscribe">
+                    <input type="email" class="form-control" placeholder="Tu email...">
+                    <button class="btn btn-default" type="submit" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Subscribiendo">Subscribite</button>
+                </form-->
                 <p><a href="mailto:fundacionarenales@gmail.com"> <i class="fa fa-envelope"></i>  fundacionarenales@gmail.com</a></p>
                 <p> - Ruben Armando “Yagua” Rodríguez ( presidente ) - +54 011 67275997 o +54 2622 524895</p>
                 <p> - Gerardo Castillo ( Tesorero ) - +54 261 5751781</p>
