@@ -43,7 +43,8 @@ class Home extends BaseController{
     private function guideList(){
         $path = 'assets/downloads/guia';
         $files = directory_map("./$path");
-        foreach($files as $i => $file):
+        $i = 0;
+        foreach($files as $file):
             $files[$i] = [
                 "href" => site_url("$path/$file"),
                 "safeName" => $file,
@@ -52,6 +53,7 @@ class Home extends BaseController{
                     str_replace("/application/controllers/","/",__DIR__."/$path/$file")
                 )
             ];
+        $i++;
         endforeach;
         return $files;
     }
