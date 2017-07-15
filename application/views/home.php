@@ -6,8 +6,13 @@
             <div class="col-md-6 col-md-offset-3">
                 <h2 class="header-title font-title text-uppercase">Fundación -  <strong>Piedra Libre</strong></h2>
                 <h4 class="color-blanco font-l">Libre acceso al <i>"Cajón de los Arenales".</i></h4>
-                <br>
-                <a href="<?= site_url('quienes-somos/objeto-de-la-fundacion')?>" class="btn btn-ghost-two">Conocé mas</a>
+                <p class="color-blanco">
+                    Conocé el objeto de la fundacion y descargate la guia de <br>
+                    sectores para disfrutar del predio de la fundación.
+                </p>
+                <a href="<?= site_url('quienes-somos/objeto-de-la-fundacion')?>"
+                   class="btn btn-ghost-two">Objeto de la fundación</a>
+                <a href="#" data-scroll="#guide" prevent="true" class="btn btn-ghost-two">Guía de Sectores</a>
                 <br>
             </div>
         </div>
@@ -38,7 +43,7 @@
     </div>
 </section>
 
-<section class="bg-four">
+<section class="bg-four" id="guide">
     <div class="container container-xl">
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3 container-l text-center">

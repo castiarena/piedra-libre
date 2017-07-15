@@ -35,8 +35,8 @@ var app = (function(win,doc){
                 });
 
             },
-            carousel : function(querySelector){
-                var elem = doc.querySelector(querySelector);
+            carousel : function(){
+                var elem = doc.querySelector('[data-slider]');
                 if(elem){
                     app.slider = new SimpleSlider(  elem , {
                         autoPlay: true,
@@ -79,13 +79,24 @@ var app = (function(win,doc){
                     }
                 });
             },
-            date_picker: function(selector){
-                $(selector).datepicker();
+            datePicker: function(){
+                $('input[data-date--picker]').datepicker();
             }
         };
 
+    _.scrollTo = function(){
+        $('[data-scroll]').on('click', function(event){
+            if(this.getAttribute('prevent')){
+                event.preventDefault();
+            }
+            var to = this.getAttribute('data-scroll');
+            $("html, body").animate({
+                scrollTop: ($(to).offset().top - 80) + 'px'
+            },200);
+        });
+    };
+
     _.newsletter = function(){
-        console.log('ada');
         $('.newsletter-subscribe').on('submit',function(event){
             event.preventDefault();
             var btn = this.querySelector('[type="submit"]');
@@ -121,12 +132,9 @@ var app = (function(win,doc){
     return {
 
         init : function(){
-            _.carousel('[data-slider]');
-            _.menu();
-            _.scrollControl();
-            _.date_picker('input[data-date--picker]');
-            _.forms();
-            _.newsletter();
+            for(var func in _){
+                _[func]();
+            }
         }
     };
 
