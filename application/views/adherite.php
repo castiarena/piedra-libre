@@ -33,7 +33,7 @@
             <div class="col-sm-4">
                 <div class="row container-xs">
                     <div class="col-sm-12">
-                        <h2>Forumario de inscripción</h2>
+                        <h2>Formulario de inscripción</h2>
                         <!--div class="container-xs">
                             <p>Completa el formulario a mano o usando alguna red social:</p>
                             <a href="#" class="btn btn-info">facebook</a>
