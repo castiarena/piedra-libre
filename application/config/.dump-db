@@ -1,3 +1,12 @@
+-- phpMyAdmin SQL Dump
+-- version 4.6.6
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: localhost:3306
+-- Tiempo de generación: 16-07-2017 a las 18:34:29
+-- Versión del servidor: 10.1.24-MariaDB-cll-lve
+-- Versión de PHP: 5.6.30
+
 CREATE DATABASE piedralibre CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE piedralibre;
 
@@ -5,11 +14,22 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
--- Table structure for table `events`
+-- Base de datos: `fundpiedralibre_db`
 --
 
-CREATE TABLE IF NOT EXISTS `events` (
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `events`
+--
+
+CREATE TABLE `events` (
   `id` int(10) NOT NULL,
   `title` varchar(255) COLLATE utf8_bin NOT NULL,
   `description` varchar(255) COLLATE utf8_bin NOT NULL,
@@ -22,44 +42,53 @@ CREATE TABLE IF NOT EXISTS `events` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `news`
+-- Estructura de tabla para la tabla `news`
 --
 
-CREATE TABLE IF NOT EXISTS `news` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `news` (
+  `id` int(10) NOT NULL,
   `title` varchar(255) COLLATE utf8_bin NOT NULL,
   `description` longtext COLLATE utf8_bin NOT NULL,
   `images` varchar(255) COLLATE utf8_bin NOT NULL,
   `tags` varchar(255) COLLATE utf8_bin NOT NULL,
   `date` date NOT NULL,
-  `created` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=31 ;
+  `created` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `tag`
+-- Estructura de tabla para la tabla `tag`
 --
 
-CREATE TABLE IF NOT EXISTS `tag` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tag` (
+  `id` int(10) NOT NULL,
   `name` varchar(255) COLLATE utf8_bin NOT NULL,
-  `created` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=20 ;
+  `created` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Estructura de tabla para la tabla `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `id` int(10) NOT NULL,
   `name` varchar(255) COLLATE utf8_bin NOT NULL,
   `nickname` varchar(255) COLLATE utf8_bin NOT NULL,
   `email` varchar(255) COLLATE utf8_bin NOT NULL,
   `password` varchar(255) COLLATE utf8_bin NOT NULL,
   `type` text COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
+  `last_name` varchar(45) COLLATE utf8_bin NOT NULL,
+  `document` int(11) NOT NULL,
+  `document_type` varchar(45) COLLATE utf8_bin NOT NULL,
+  `residence` varchar(255) COLLATE utf8_bin NOT NULL,
+  `birth` date NOT NULL,
+  `country` varchar(45) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
 
 --
 -- Dumping data for table `users`
@@ -67,3 +96,49 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `name`, `nickname`, `email`, `password`, `type`) VALUES
 (1, 'webmaster', 'admin', 'admin@fundacionpiedralibre.org', 'root', 'admin');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tag`
+--
+ALTER TABLE `tag`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+--
+-- AUTO_INCREMENT de la tabla `tag`
+--
+ALTER TABLE `tag`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+--
+-- AUTO_INCREMENT de la tabla `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
